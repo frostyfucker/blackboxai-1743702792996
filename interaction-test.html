@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interaction Tests - Echoes of the Algo</title>
+    <script src="app.js"></script>
+    <style>
+        .test-container {
+            padding: 20px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+        .test-button {
+            padding: 8px 16px;
+            margin: 5px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .test-button:hover {
+            background: #45a049;
+        }
+        h1, h2 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interaction Tests</h1>
+    
+    <div class="test-container">
+        <h2>Keyboard Input Tests</h2>
+        <button class="test-button" onclick="simulateKey('w')">Simulate W Key</button>
+        <button class="test-button" onclick="simulateKey('ArrowUp')">Simulate Up Arrow</button>
+        <button class="test-button" onclick="simulateKey('a')">Simulate A Key</button>
+        <button class="test-button" onclick="simulateKey('s')">Simulate S Key</button>
+        <button class="test-button" onclick="simulateKey('d')">Simulate D Key</button>
+    </div>
+
+    <div class="test-container">
+        <h2>Weather System Tests</h2>
+        <button class="test-button" onclick="testWeatherChange('rain')">Test Rain Preset</button>
+        <button class="test-button" onclick="testWeatherChange('snow')">Test Snow Preset</button>
+        <button class="test-button" onclick="testWeatherChange('invalid')">Test Invalid Preset</button>
+    </div>
+
+    <div class="test-container">
+        <h2>Info Point Tests</h2>
+        <button class="test-button" onclick="testInfoPointClick()">Test Info Point Click</button>
+        <button class="test-button" onclick="testInfoPointInvalidClick()">Test Invalid Click</button>
+    </div>
+
+    <div class="test-container">
+        <h2>Modal Tests</h2>
+        <button class="test-button" onclick="testModalDisplay()">Test Modal Display</button>
+        <button class="test-button" onclick="testModalClose()">Test Modal Close</button>
+    </div>
+
+    <script>
+        function simulateKey(key) {
+            const event = new KeyboardEvent('keydown', { key: key });
+            document.dispatchEvent(event);
+            console.log(`[TEST] Dispatched keydown event for: ${key}`);
+        }
+
+        function testWeatherChange(preset) {
+            const select = document.createElement('select');
+            select.id = 'weather-select';
+            select.value = preset;
+            const weather = document.createElement('div');
+            weather.id = 'weather';
+            document.body.appendChild(select);
+            document.body.appendChild(weather);
+            
+            const event = new Event('change');
+            select.dispatchEvent(event);
+            console.log(`[TEST] Weather change test for preset: ${preset}`);
+        }
+
+        function testInfoPointClick() {
+            const point = document.createElement('div');
+            point.className = 'info-point';
+            point.setAttribute('data-info', 'Test info point content');
+            const sphere = document.createElement('a-sphere');
+            point.appendChild(sphere);
+            document.body.appendChild(point);
+            
+            const event = new MouseEvent('click', { bubbles: true });
+            point.dispatchEvent(event);
+            console.log('[TEST] Info point click test dispatched');
+        }
+
+        function testInfoPointInvalidClick() {
+            const point = document.createElement('div');
+            point.className = 'info-point';
+            const child = document.createElement('div');
+            point.appendChild(child);
+            document.body.appendChild(point);
+            
+            const event = new MouseEvent('click', { bubbles: true });
+            child.dispatchEvent(event);
+            console.log('[TEST] Invalid info point click test dispatched');
+        }
+
+        function testModalDisplay() {
+            const modalContent = 'Test modal content';
+            const event = new CustomEvent('showModal', { detail: { content: modalContent } });
+            document.dispatchEvent(event);
+            console.log('[TEST] Modal display test dispatched');
+        }
+
+        function testModalClose() {
+            const modal = document.createElement('div');
+            modal.className = 'modal-overlay';
+            document.body.appendChild(modal);
+            
+            const event = new MouseEvent('click');
+            modal.dispatchEvent(event);
+            console.log('[TEST] Modal close test dispatched');
+        }
+    </script>
+</body>
+</html>
