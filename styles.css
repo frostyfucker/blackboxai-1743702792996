@@ -1,0 +1,192 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+}
+
+.intro-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 1s ease;
+}
+
+.intro-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.intro-content {
+    text-align: center;
+    color: white;
+}
+
+/* Debug mode styles */
+[debug="enabled"] {
+    --debug-color: rgba(255, 0, 0, 0.1);
+}
+
+/* Title animation */
+@keyframes pulse-glow {
+    0% { 
+        transform: scale(1);
+        text-shadow: 0 0 10px rgba(139, 92, 246, 0);
+    }
+    50% {
+        transform: scale(1.05);
+        text-shadow: 0 0 20px rgba(139, 92, 246, 0.7);
+    }
+    100% {
+        transform: scale(1);
+        text-shadow: 0 0 10px rgba(139, 92, 246, 0);
+    }
+}
+
+/* Sparkle animation */
+@keyframes sparkle {
+    0% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 0; transform: scale(0.5); }
+}
+
+.sparkle {
+    position: absolute;
+    font-size: 1.5rem;
+    animation: sparkle 2s infinite;
+    pointer-events: none;
+}
+
+.intro-content {
+    position: relative;
+}
+
+.intro-content h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: pulse-glow 2s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+}
+
+.intro-content p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: #94a3b8;
+}
+
+#startButton {
+    padding: 0.75rem 1.5rem;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 9999px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#startButton:hover {
+    background-color: #2563eb;
+    transform: scale(1.05);
+}
+
+.weather-panel {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem;
+    background-color: rgba(31, 41, 55, 0.7);
+    border-radius: 0.5rem;
+    z-index: 100;
+}
+
+#weather-select {
+    width: 100%;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.info-point .a-sphere {
+    filter: url('#pixelate');
+    transition: filter 0.3s ease;
+}
+
+.touch-controls {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1rem;
+    z-index: 100;
+}
+
+.touch-button {
+    width: 3rem;
+    height: 3rem;
+    background-color: rgba(59, 130, 246, 0.7);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.touch-button:hover {
+    background-color: rgba(59, 130, 246, 0.9);
+    transform: scale(1.1);
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    max-width: 80%;
+}
+
+@media (max-width: 768px) {
+    .intro-content h1 {
+        font-size: 2rem;
+    }
+    
+    .intro-content p {
+        font-size: 1rem;
+    }
+    
+    .touch-button {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1rem;
+    }
+}
