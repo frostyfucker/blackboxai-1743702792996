@@ -64,8 +64,9 @@ Provide contact information for support or questions.
 ## Repository Information
 - **Repository:** frostyfucker/blackboxai-1743702792996
 - **Repo ID:** 960007079
-- **Description:** Built by Blackbox AI
+- **Description:** Built by frostyfucker, ChatGPT, Gemini, Meta, Replit, & Blackbox AI you guys! ;D
 - **Languages:**
     - JavaScript: 57.6%
     - HTML: 30.4%
     - CSS: 12%
+    - So Far.. 0.001 random entropic material of no sense or value yet necessary! 
